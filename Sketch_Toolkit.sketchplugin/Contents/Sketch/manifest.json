@@ -1,0 +1,18 @@
+{
+    "name" : "A Material Design Pattern",
+    "identifier" : "maxoxo.plugin",
+    "version" : "1.0",
+    "description" : "Only for Material Design Pattern",
+    "authorEmail" : "ximy1803@gmail.com",
+    "author" : "maxoxo",
+
+    "commands" : [
+    {
+      "script" : "rename.js",
+      "handler" : "onRun",
+      "shortcut" : "control shift r",
+      "name" : "重命名",
+      "identifier" : "maxoxo.plugin.materialdesignpattern"
+    },
+  ]
+}
