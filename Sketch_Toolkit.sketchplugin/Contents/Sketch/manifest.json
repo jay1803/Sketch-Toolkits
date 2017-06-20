@@ -8,11 +8,18 @@
 
     "commands" : [
     {
-      "script" : "rename.js",
+      "script" : "application.js",
       "handler" : "onRun",
       "shortcut" : "control shift r",
-      "name" : "重命名",
-      "identifier" : "maxoxo.plugin.materialdesignpattern"
+      "name" : "生成图标主题",
+      "identifier" : "maxoxo.plugin.sketchtoolkit"
     },
+    {
+      "script" : "setSharedStyle.js",
+      "handler" : "onRun",
+      "shortcut" : "control shift t",
+      "name" : "设置样式",
+      "identifier" : "maxoxo.plugin.setsharedstyle"
+    }
   ]
 }
