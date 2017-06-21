@@ -21,11 +21,11 @@
             "identifier": "maxoxo.plugin.setsharedstyle"
         },
         {
-            "script": "rename.js",
+            "script": "copyArtboard.js",
             "handler": "onRun",
             "shortcut": "control shift y",
-            "name": "重命名和复制",
-            "identifier": "maxoxo.plugin.rename"
+            "name": "重命图层",
+            "identifier": "maxoxo.plugin.copyartboard"
         }
     ]
 }

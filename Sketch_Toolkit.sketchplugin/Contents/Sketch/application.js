@@ -8,14 +8,24 @@ var onRun = function(context) {
     if (selection.count() == 0) {
         // doc.showMessage("Please select something.");
     } else {
+        log("--- New test start here ---")
         for (var i = 0; i < selection.count(); i++) {
             var group = selection[i];
-            var childrenLayer = group.children();
-            var layer = group.parentGroup();
-            var iconName = getIconName(group);
-            setDefaultName(layer, iconName);
-            setSharedStyle(childrenLayer, sharedStyles);
-            copyLayer(layer, iconName, sharedStyles);
+            if (group.class() == "MSLayerGroup") {
+                var childrenLayer = group.children();
+                var artborad = group.parentGroup();
+                var iconName = getIconName(group);
+                var hasStyle = isShape(artborad);
+                if (hasStyle == null) {
+                    setDefaultName(artborad, iconName);
+                    setSharedStyle(childrenLayer, sharedStyles);
+                    copyLayer(artborad, sharedStyles);
+                    log("set style first");
+                } else {
+                    copyLayer(artborad, sharedStyles);
+                    log("set style after")
+                }
+            }
         }
     }
 }

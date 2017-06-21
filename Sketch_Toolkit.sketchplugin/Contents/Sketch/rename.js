@@ -1,18 +1,4 @@
 @import 'setSharedStyle.js'
-var onRun = function(context) {
-    var sketch = context.api();
-    var doc = sketch.selectedDocument;
-    var selection = context.selection;
-    var sharedStyles = doc.sketchObject.documentData().layerStyles();
-
-    var group = selection[0];
-    var childrenLayer = group.children();
-    var layer = group.parentGroup();
-    var iconName = getIconName(group);
-    setDefaultName(layer, iconName);
-    setSharedStyle(childrenLayer, sharedStyles);
-    copyLayer(layer, iconName, sharedStyles);
-}
 
 function getIconName(group) {
     var childrenLayer = group.children();
@@ -28,9 +14,10 @@ function setDefaultName (layer, iconName) {
     var re = /(icon\/\w+\/)(\w+)(\/(default|light|primary|secondary))/;
     var nameDefault = layerName.replace(re, "$1" + iconName + "$3");
     if (layerName == nameDefault) {
-        log("DONE.")
+        log("layer name already changed.")
     } else {
         layer.setName(nameDefault);
+        log("set layer name to default.");
     }
 }
 
@@ -38,9 +25,10 @@ function rename(layer) {
     var layerName = layer.name();
     var re = /(icon\/\w+\/)(\w+)(\/(default|light|primary|secondary))/;
     var nameDefault = layerName.replace(re, "$1" + "$2" + "/default");
-    var nameLight = layerName.replace(re, "$1" + "$2" + "/light");
+    var nameLight = nameDefault.replace(re, "$1" + "$2" + "/light");
     var namePrimary = nameDefault.replace(re, "$1" + "$2" + "/primary");
     var nameSecondary = nameDefault.replace(re, "$1" + "$2" + "/secondary");
+
     if (layerName == nameDefault) {
         layer.setName(nameLight);
     } else if (layerName == nameLight) {
@@ -50,26 +38,30 @@ function rename(layer) {
     } else {
         layer.setName(nameDefault);
     }
-    // switch (layerName) {
-    //     case nameDefault:
-    //         layer.setName(nameLight);
-    //         break;
-    //     case nameLight:
-    //         layer.setName(namePrimary);
-    //         break;
-    //     case namePrimary:
-    //         layer.setName(nameSecondary);
-    //         break;
-    //     default:
-    //         layer.setName(nameDefault);
-    //         break;
-    // }
 }
 
-function copyLayer (layer, iconName, sharedStyles) {
-    for (var i = 0; i < 3; i++) {
+function copyTime (layer) {
+    var layerName = layer.name();
+    var re = /(icon\/\w+\/)(\w+)(\/(default|light|primary|secondary))/;
+    var nameDefault = layerName.replace(re, "$1" + "$2" + "/default");
+    var nameLight = nameDefault.replace(re, "$1" + "$2" + "/light");
+    var namePrimary = nameDefault.replace(re, "$1" + "$2" + "/primary");
+    var nameSecondary = nameDefault.replace(re, "$1" + "$2" + "/secondary");
+    if (layerName == nameDefault) {
+        return 3;
+    } else if (layerName == nameLight) {
+        return 2;
+    } else if (layerName == namePrimary) {
+        return 1;
+    }
+}
+
+function copyLayer (layer, sharedStyles) {
+    var time = copyTime(layer);
+    // log(time);
+    for (var i = 0; i < time; i++) {
         layer = layer.duplicate();
-        var childrenLayer = layer.children();
+        var subLayer = layer.children();
         var layerFrame = layer.frame();
         var layerName = layer.name();
         var layerX = layerFrame.x();
@@ -77,8 +69,8 @@ function copyLayer (layer, iconName, sharedStyles) {
         var layerW = layerFrame.width();
         var layerH = layerFrame.height();
         var newLayerX = layerX + layerW + 24;
-        rename(layer, iconName);
-        setSharedStyle(childrenLayer, sharedStyles);
+        rename(layer);
+        setSharedStyle(subLayer, sharedStyles);
         layerFrame.setRect(NSMakeRect(newLayerX, layerY, layerW, layerH));
     }
 }
