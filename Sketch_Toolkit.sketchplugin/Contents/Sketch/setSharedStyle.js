@@ -19,8 +19,6 @@ function getSharedStyle (sharedStyles) {
     var numberOfSharedStyles = Number(sharedStyles.numberOfSharedStyles());
     for (var i = 0; i < numberOfSharedStyles; i++) {
         var sharedStyle = sharedStyles.objects()[i];
-        // var styleName = sharedStyle.name();
-        // var styleId = sharedStyle.id();
         sharedStyleContainer.push({
             "id" : sharedStyle.objectID(),
             "name" : sharedStyle.name(),
@@ -62,12 +60,15 @@ function setSharedStyle (layers, sharedStyles) {
 		if (layer.class() == "MSShapeGroup" || layer.class() == "MSOvalShape") {
 			var layerStyle = layer.style();
             var layerFill = layerStyle.fills().firstObject();
+
             var styleId = layerStyle.sharedObjectID();
             var styles = getSharedStyle(sharedStyles);
+
             var dark = getStyleIndex("icon_color_default", styles);
             var light = getStyleIndex("icon_color_light", styles);
             var primary = getStyleIndex("icon_color_primary", styles);
             var secondary = getStyleIndex("icon_color_secondary", styles);
+
             var darkId = getStyleId("icon_color_default", styles);
             var lightId = getStyleId("icon_color_light", styles);
             var primaryId = getStyleId("icon_color_primary", styles);
@@ -86,8 +87,10 @@ function setSharedStyle (layers, sharedStyles) {
                         break;
                     case lightId:
                         setStyleWithName(layer, "icon_color_primary", styles, sharedStyles);
+                        break;
                     case primaryId:
                         setStyleWithName(layer, "icon_color_secondary", styles, sharedStyles);
+                        break;
                     default:
                         log("style set done.")
                         break;
