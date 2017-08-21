@@ -16,7 +16,8 @@ var onRun = function(context) {
     var states_name = ["primary", "secondary", "hint"];
     var themes_name = ["dark", "light", "blue", "red"];
     var aligns_name = ["left", "right", "middle", "justify"]
-    var text_color = MSColor.colorWithRed_green_blue_alpha(0/255, 0/255, 0/255, 0.87);
+    var dark_color, light_color, blue_color, red_color;
+    var texts_color = [dark_color, light_color, blue_color, red_color];
 
 	for (var theme = 0; theme < themes_name.length; theme++) {
         print("start theme loop");
@@ -37,7 +38,12 @@ var onRun = function(context) {
                     var text = MSTextLayer.new();
                     var font = fonts[0];
                     var x = state * 500;
-                    var y = theme * 800 + 40 * size;
+                    var y = theme * 800 + 40 * size + 40 * align;
+                    dark_color = MSColor.colorWithRed_green_blue_alpha(0/255, 0/255, 0/255, opacity);
+                    light_color = MSColor.colorWithRed_green_blue_alpha(255/255, 255/255, 255/255, opacity);
+                    blue_color = MSColor.colorWithRed_green_blue_alpha(63/255, 81/255, 181/255, opacity);
+                    red_color = MSColor.colorWithRed_green_blue_alpha(255/255, 63/255, 128/255, opacity);
+                    var text_color = texts_color[state];
                     if (font_size == 112) {
                         var font = fonts[2];
                         var size_name = font_size + "_Regular";
@@ -62,7 +68,7 @@ var onRun = function(context) {
                     page.addLayer(text);
                     print("Create Text Style");
                     var text_style = text_styles.addSharedStyleWithName_firstInstance(layer_name, text.style());
-                    print("the end");
+                    print("====================================");
                 }
             }
         }
