@@ -42,18 +42,19 @@ var onRun = function(context) {
                         blue_color = MSColor.colorWithRed_green_blue_alpha(63/255, 81/255, 181/255, opacity),
                         red_color = MSColor.colorWithRed_green_blue_alpha(255/255, 63/255, 128/255, opacity),
                         texts_color = [dark_color, light_color, blue_color, red_color],
-                        text_color = texts_color[theme];
+                        text_color = texts_color[theme],
+                        layer_name = theme_name + "/" + size_name + "/" + align_name + "/" + state_name;
                     if (font_size == 112) {
-                        var font = fonts[2];
-                        var size_name = font_size + "_Light";
+                        font = fonts[2];
+                        size_name = font_size + "_Light";
+                        layer_name = theme_name + "/" + size_name + "/" + align_name + "/" + state_name;
                     }
-                    // if (font_size == 12 || font_size == 14){
-                    //     for (var w = 0; w < 2; w++) {
-                    //         var element = array[w];
+                    if (font_size == 12 || font_size == 14){
+                        for (var w = 0; w < 2; w++) {
+                            var element = array[w];
                             
-                    //     }
-                    // }
-                    var layer_name = theme_name + "/" + size_name + "/" + align_name + "/" + state_name;
+                        }
+                    }
                     var string_value = "文本标签";
                     text.setName(layer_name);
                     text.setStringValue(string_value);
