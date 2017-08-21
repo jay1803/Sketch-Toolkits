@@ -26,46 +26,43 @@ var onRun = function(context) {
             print("start state loop");
             var state_name = states_name[state];
             var opacitys = themes_opacity[state];
-            for (var opacity = 0; opacity < opacitys.length; opacity++) {
-                print("start opacity loop");
-                var op = opacitys[opacity];
-                for (var align = 0; align < aligns_name.length; align++) {
-                    print("start alignment loop");
-                    var align_name = aligns_name[align];
-                    for (var size = 0; size < font_sizes.length; size++) {
-                        print("start font size loop");
-                        var font_size = font_sizes[size];
-                        var size_name = size + "_Regular";
-                        var text = MSTextLayer.new();
-                        var font = fonts[0];
-                        var x = state * 500;
-                        var y = theme * 800 + 40 * size;
-                        if (font_size == 112) {
-                            var font = fonts[2];
-                            var size_name = size + "_Regular";
-                        }
-                        // if (font_size == 12 || font_size == 14){
-                        //     for (var w = 0; w < 2; w++) {
-                        //         var element = array[w];
-                                
-                        //     }
-                        // }
-                        var layer_name = theme_name + "/" + size_name + "/" + align_name + "/" + state_name;
-                        var string_value = "文本标签";
-                        text.setName(layer_name);
-                        text.setStringValue(string_value);
-                        text.frame().setX(x);
-                        text.frame().setY(y);
-                        text.setFontSize(font_size);
-                        text.setLineHeight(line_heights[size]);
-                        text.setTextColor(text_color);
-                        text.setFontPostscriptName(font);
-                        text.setTextAlignment(align);
-                        page.addLayer(text);
-                        print("Create Text Style");
-                        var text_style = text_styles.addSharedStyleWithName_firstInstance(layer_name, text.style());
-                        print("the end");
+            var opacity = opacitys[state];
+            for (var align = 0; align < aligns_name.length; align++) {
+                print("start alignment loop");
+                var align_name = aligns_name[align];
+                for (var size = 0; size < font_sizes.length; size++) {
+                    print("start font size loop");
+                    var font_size = font_sizes[size];
+                    var size_name = size + "_Regular";
+                    var text = MSTextLayer.new();
+                    var font = fonts[0];
+                    var x = state * 500;
+                    var y = theme * 800 + 40 * size;
+                    if (font_size == 112) {
+                        var font = fonts[2];
+                        var size_name = font_size + "_Regular";
                     }
+                    // if (font_size == 12 || font_size == 14){
+                    //     for (var w = 0; w < 2; w++) {
+                    //         var element = array[w];
+                            
+                    //     }
+                    // }
+                    var layer_name = theme_name + "/" + size_name + "/" + align_name + "/" + state_name;
+                    var string_value = "文本标签";
+                    text.setName(layer_name);
+                    text.setStringValue(string_value);
+                    text.frame().setX(x);
+                    text.frame().setY(y);
+                    text.setFontSize(font_size);
+                    text.setLineHeight(line_heights[size]);
+                    text.setTextColor(text_color);
+                    text.setFontPostscriptName(font);
+                    text.setTextAlignment(align);
+                    page.addLayer(text);
+                    print("Create Text Style");
+                    var text_style = text_styles.addSharedStyleWithName_firstInstance(layer_name, text.style());
+                    print("the end");
                 }
             }
         }
