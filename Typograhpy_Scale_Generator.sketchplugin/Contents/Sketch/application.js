@@ -4,9 +4,9 @@ var onRun = function(context) {
     var selection = context.selection;
     var text_styles = document.documentData().layerTextStyles();
     var styles = text_styles.objects();
-    var font_sizes = [12, 14, 14, 16, 16, 20, 24, 34, 45, 56, 112];
+    var font_sizes = [12, 14, 16, 20, 24, 34, 45, 56, 112];
     var fonts = ["PingFangSC-Regular", "PingFangSC-Medium", "PingFangSC-Light"];
-    var line_heights = [16, 20, 24, 24, 28, 24, 32, 40, 50, 64, 128];
+    var line_heights = [16, 20, 24, 24, 32, 40, 50, 64, 128];
     var themes_opacity = [
         [0.87, 0.54, 0.38],
         [1, 0.7, 0.5],
@@ -18,19 +18,19 @@ var onRun = function(context) {
     var aligns_name = ["left", "right", "middle", "justify"]
 
 	for (var theme = 0; theme < themes_name.length; theme++) {
-        print("start theme loop");
+        // print("start theme loop");
         // 生成文本
         var theme_name = themes_name[theme];
         for (var state = 0; state < states_name.length; state++) {
-            print("start state loop");
+            // print("start state loop");
             var state_name = states_name[state];
             var opacitys = themes_opacity[theme];
             var opacity = opacitys[state];
             for (var align = 0; align < aligns_name.length; align++) {
-                print("start alignment loop");
+                // print("start alignment loop");
                 var align_name = aligns_name[align];
                 for (var size = 0; size < font_sizes.length; size++) {
-                    print("start font size loop");
+                    // print("start font size loop");
                     var font_size = font_sizes[size],
                         size_name = font_size + "_Regular",
                         text = MSTextLayer.new(),
@@ -44,7 +44,7 @@ var onRun = function(context) {
                         texts_color = [dark_color, light_color, blue_color, red_color],
                         text_color = texts_color[theme],
                         layer_name = theme_name + "/" + size_name + "/" + align_name + "/" + state_name;
-                        function addTextLayer(layer_name, string_value, x, y, font_size, line_heights, text_color, font, align) {
+                        function addTextLayer(text_styles, layer_name, x, y, font_size, line_heights, text_color, font, align) {
                             var string_value = "文本标签";
                             text.setName(layer_name);
                             text.setStringValue(string_value);
@@ -56,28 +56,27 @@ var onRun = function(context) {
                             text.setFontPostscriptName(font);
                             text.setTextAlignment(align);
                             page.addLayer(text);
-                            return text;
+                            var text_style = text_styles.addSharedStyleWithName_firstInstance(layer_name, text.style());
+                            return text_style;
                         }
                     if (font_size == 112) {
                         font = fonts[2];
                         size_name = font_size + "_Light";
                         layer_name = theme_name + "/" + size_name + "/" + align_name + "/" + state_name;
-                        addTextLayer(layer_name, string_value, x, y, font_size, line_heights[size], text_color, font, align);
+                        addTextLayer(text_styles, layer_name, x, y, font_size, line_heights[size], text_color, font, align);
                     }else if (font_size == 12 || font_size == 14){
-                        for (var w = 0; w < 2; w++) {
-                            var font = fonts[w];
-                            var weights = ["Regular", "Medium"];
-                            var weight = weights[w];
+                        var weights = ["Regular", "Medium"];
+                        for (var w = 0; w < weights.length; w++) {
+                            var font = fonts[w],
+                                weight = weights[w];
                             size_name = font_size + "_" + weight;
                             layer_name = theme_name + "/" + size_name + "/" + align_name + "/" + state_name;
-                            addTextLayer(layer_name, string_value, x, y, font_size, line_heights[size], text_color, font, align);
+                            addTextLayer(text_styles, layer_name, x, y, font_size, line_heights[size], text_color, font, align);
                         }
                     } else {
-                        addTextLayer(layer_name, string_value, x, y, font_size, line_heights[size], text_color, font, align);
+                        addTextLayer(text_styles, layer_name, x, y, font_size, line_heights[size], text_color, font, align);
                     }
-                    print("Create Text Style");
-                    var text_style = text_styles.addSharedStyleWithName_firstInstance(layer_name, text.style());
-                    print("====================================");
+                    // print("====================================");
                 }
             }
         }
