@@ -39,8 +39,6 @@ var onRun = function(context) {
                         var font_size = font_sizes[size];
                         var size_name = size + "_Regular";
                         var text = MSTextLayer.new();
-                        var layer_name = theme_name + "/" + size_name + "/" + align_name + "/" + state_name;
-                        var string_value = name;
                         var font = fonts[0];
                         if (font_size == 112) {
                             var font = fonts[2];
@@ -52,6 +50,8 @@ var onRun = function(context) {
                                 
                         //     }
                         // }
+                        var layer_name = theme_name + "/" + size_name + "/" + align_name + "/" + state_name;
+                        var string_value = layer_name;
                         text.setName(layer_name);
                         text.setStringValue(string_value);
                         text.frame().setX(x);
