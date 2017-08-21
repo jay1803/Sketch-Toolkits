@@ -21,13 +21,11 @@ var onRun = function(context) {
 	for (var theme = 0; theme < themes_name.length; theme++) {
         print("start theme loop");
         // 生成文本
-        var y = theme * 800;
         var theme_name = themes_name[theme];
         for (var state = 0; state < states_name.length; state++) {
             print("start state loop");
             var state_name = states_name[state];
             var opacitys = themes_opacity[state];
-            var x = state * 1000;
             for (var opacity = 0; opacity < opacitys.length; opacity++) {
                 print("start opacity loop");
                 var op = opacitys[opacity];
@@ -40,6 +38,8 @@ var onRun = function(context) {
                         var size_name = size + "_Regular";
                         var text = MSTextLayer.new();
                         var font = fonts[0];
+                        var x = state * 500;
+                        var y = theme * 800 + 40 * size;
                         if (font_size == 112) {
                             var font = fonts[2];
                             var size_name = size + "_Regular";
@@ -51,7 +51,7 @@ var onRun = function(context) {
                         //     }
                         // }
                         var layer_name = theme_name + "/" + size_name + "/" + align_name + "/" + state_name;
-                        var string_value = layer_name;
+                        var string_value = "文本标签";
                         text.setName(layer_name);
                         text.setStringValue(string_value);
                         text.frame().setX(x);
