@@ -44,28 +44,37 @@ var onRun = function(context) {
                         texts_color = [dark_color, light_color, blue_color, red_color],
                         text_color = texts_color[theme],
                         layer_name = theme_name + "/" + size_name + "/" + align_name + "/" + state_name;
+                        function addTextLayer(layer_name, string_value, x, y, font_size, line_heights, text_color, font, align) {
+                            var string_value = "文本标签";
+                            text.setName(layer_name);
+                            text.setStringValue(string_value);
+                            text.frame().setX(x);
+                            text.frame().setY(y);
+                            text.setFontSize(font_size);
+                            text.setLineHeight(line_heights);
+                            text.setTextColor(text_color);
+                            text.setFontPostscriptName(font);
+                            text.setTextAlignment(align);
+                            page.addLayer(text);
+                            return text;
+                        }
                     if (font_size == 112) {
                         font = fonts[2];
                         size_name = font_size + "_Light";
                         layer_name = theme_name + "/" + size_name + "/" + align_name + "/" + state_name;
-                    }
-                    if (font_size == 12 || font_size == 14){
+                        addTextLayer(layer_name, string_value, x, y, font_size, line_heights[size], text_color, font, align);
+                    }else if (font_size == 12 || font_size == 14){
                         for (var w = 0; w < 2; w++) {
-                            var element = array[w];
-                            
+                            var font = fonts[w];
+                            var weights = ["Regular", "Medium"];
+                            var weight = weights[w];
+                            size_name = font_size + "_" + weight;
+                            layer_name = theme_name + "/" + size_name + "/" + align_name + "/" + state_name;
+                            addTextLayer(layer_name, string_value, x, y, font_size, line_heights[size], text_color, font, align);
                         }
+                    } else {
+                        addTextLayer(layer_name, string_value, x, y, font_size, line_heights[size], text_color, font, align);
                     }
-                    var string_value = "文本标签";
-                    text.setName(layer_name);
-                    text.setStringValue(string_value);
-                    text.frame().setX(x);
-                    text.frame().setY(y);
-                    text.setFontSize(font_size);
-                    text.setLineHeight(line_heights[size]);
-                    text.setTextColor(text_color);
-                    text.setFontPostscriptName(font);
-                    text.setTextAlignment(align);
-                    page.addLayer(text);
                     print("Create Text Style");
                     var text_style = text_styles.addSharedStyleWithName_firstInstance(layer_name, text.style());
                     print("====================================");
