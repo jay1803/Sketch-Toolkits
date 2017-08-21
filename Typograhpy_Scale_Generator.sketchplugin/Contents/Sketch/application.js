@@ -13,11 +13,9 @@ var onRun = function(context) {
         [1, 0.54, 0.38],
         [1, 0.54, 0.38]
     ]
-    var states_name = ["primary", "secondary", "hint"];
+    var states_name = ["default", "secondary", "hint"];
     var themes_name = ["dark", "light", "blue", "red"];
     var aligns_name = ["left", "right", "middle", "justify"]
-    var dark_color, light_color, blue_color, red_color;
-    var texts_color = [dark_color, light_color, blue_color, red_color];
 
 	for (var theme = 0; theme < themes_name.length; theme++) {
         print("start theme loop");
@@ -26,27 +24,28 @@ var onRun = function(context) {
         for (var state = 0; state < states_name.length; state++) {
             print("start state loop");
             var state_name = states_name[state];
-            var opacitys = themes_opacity[state];
+            var opacitys = themes_opacity[theme];
             var opacity = opacitys[state];
             for (var align = 0; align < aligns_name.length; align++) {
                 print("start alignment loop");
                 var align_name = aligns_name[align];
                 for (var size = 0; size < font_sizes.length; size++) {
                     print("start font size loop");
-                    var font_size = font_sizes[size];
-                    var size_name = size + "_Regular";
-                    var text = MSTextLayer.new();
-                    var font = fonts[0];
-                    var x = state * 500;
-                    var y = theme * 800 + 40 * size + 40 * align;
-                    dark_color = MSColor.colorWithRed_green_blue_alpha(0/255, 0/255, 0/255, opacity);
-                    light_color = MSColor.colorWithRed_green_blue_alpha(255/255, 255/255, 255/255, opacity);
-                    blue_color = MSColor.colorWithRed_green_blue_alpha(63/255, 81/255, 181/255, opacity);
-                    red_color = MSColor.colorWithRed_green_blue_alpha(255/255, 63/255, 128/255, opacity);
-                    var text_color = texts_color[state];
+                    var font_size = font_sizes[size],
+                        size_name = font_size + "_Regular",
+                        text = MSTextLayer.new(),
+                        font = fonts[0],
+                        x = state * 500,
+                        y = theme * 2000 + 40 * size + 40 * line_heights[size] + 40 * align + 40 * state,
+                        dark_color = MSColor.colorWithRed_green_blue_alpha(0/255, 0/255, 0/255, opacity),
+                        light_color = MSColor.colorWithRed_green_blue_alpha(255/255, 255/255, 255/255, opacity),
+                        blue_color = MSColor.colorWithRed_green_blue_alpha(63/255, 81/255, 181/255, opacity),
+                        red_color = MSColor.colorWithRed_green_blue_alpha(255/255, 63/255, 128/255, opacity),
+                        texts_color = [dark_color, light_color, blue_color, red_color],
+                        text_color = texts_color[theme];
                     if (font_size == 112) {
                         var font = fonts[2];
-                        var size_name = font_size + "_Regular";
+                        var size_name = font_size + "_Light";
                     }
                     // if (font_size == 12 || font_size == 14){
                     //     for (var w = 0; w < 2; w++) {
