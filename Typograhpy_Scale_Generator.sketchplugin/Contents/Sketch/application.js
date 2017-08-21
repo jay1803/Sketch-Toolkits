@@ -63,7 +63,7 @@ var onRun = function(context) {
                         text.setTextAlignment(align);
                         page.addLayer(text);
                         print("Create Text Style");
-                        var text_style = text_styles.addSharedStyleWithName_firstInstance(name, text.style());
+                        var text_style = text_styles.addSharedStyleWithName_firstInstance(layer_name, text.style());
                         print("the end");
                     }
                 }
