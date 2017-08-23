@@ -14,7 +14,7 @@ var onRun = function(context) {
         [1, 0.54, 0.38]
     ];
     var states_name = ["default", "secondary", "hint"];
-    var themes_name = ["dark", "light", "blue", "red"];
+    var themes_name = ["dark", "light", "primary", "secondary"];
     var aligns_name = [".left", "right", "center"];
 
     function addTextLayer(text_styles, layer_name, x, y, font_size, line_heights, text_color, font, align) {
