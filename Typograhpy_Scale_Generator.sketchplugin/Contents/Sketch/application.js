@@ -5,6 +5,7 @@ var onRun = function(context) {
     var text_styles = document.documentData().layerTextStyles();
     var styles = text_styles.objects();
     var font_sizes = [12, 14, 16, 20, 24, 34, 45, 56, 112];
+    var size_names = ["caption", "body", "subhead", "title", "headline", "display_1", "display_2", "display_3", "display_4"];
     var fonts = ["PingFangSC-Regular", "PingFangSC-Medium", "PingFangSC-Light"];
     var line_heights = [16, 20, 24, 24, 32, 40, 50, 64, 128];
     var themes_opacity = [
@@ -52,7 +53,7 @@ var onRun = function(context) {
                 for (var size = 0; size < font_sizes.length; size++) {
                     // print("start font size loop");
                     var font_size = font_sizes[size],
-                        size_name = font_size + "_Regular",
+                        size_name = size_names[size],
                         text = MSTextLayer.new(),
                         font = fonts[0],
                         line_height = line_heights[size],
@@ -66,17 +67,15 @@ var onRun = function(context) {
                         layer_name = theme_name + "/" + size_name + "/" + align_name + "/" + state_name;
                     if (font_size == 112) {
                         font = fonts[2];
-                        size_name = font_size + "_Light";
-                        layer_name = theme_name + "/" + size_name + "/" + align_name + "/" + state_name;
                         var text = addTextLayer(text_styles, layer_name, x, y, font_size, line_height, text_color, font, align);
                         var frame = text.frame();
                         y = frame.y() + line_height + 40;
-                    }else if (font_size == 12 || font_size == 14){
-                        var weights = ["Regular", "Medium"];
+                    }else if (font_size == 12 || font_size == 14 || font_size == 20){
+                        var weights = ["1", "2"];
                         for (var w = 0; w < weights.length; w++) {
                             font = fonts[w];
                             var weight = weights[w];
-                            size_name = font_size + "_" + weight;
+                            size_name = size_names[size] + "_" + weight;
                             layer_name = theme_name + "/" + size_name + "/" + align_name + "/" + state_name;
                             var text = addTextLayer(text_styles, layer_name, x, y, font_size, line_height, text_color, font, align);
                             var frame = text.frame();
