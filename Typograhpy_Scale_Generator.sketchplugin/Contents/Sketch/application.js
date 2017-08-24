@@ -9,12 +9,12 @@ var onRun = function(context) {
     var fonts = ["PingFangSC-Regular", "PingFangSC-Medium", "PingFangSC-Light"];
     var line_heights = [16, 20, 24, 24, 32, 40, 50, 64, 128];
     var themes_opacity = [
-        [0.87, 0.54, 0.38],
-        [1, 0.7, 0.5],
-        [1, 0.54, 0.38],
-        [1, 0.54, 0.38]
+        [0.87, 0.54, 0.38, 0.26],
+        [1, 0.7, 0.5, 0.3],
+        [1, 0.54, 0.38, 0.26],
+        [1, 0.54, 0.38, 0.26]
     ];
-    var states_name = ["default", "secondary", "hint"];
+    var states_name = ["default", "secondary", "hint", "diabled"];
     var themes_name = ["dark", "light", "primary", "secondary"];
     var aligns_name = [".left", "right", "center"];
 
