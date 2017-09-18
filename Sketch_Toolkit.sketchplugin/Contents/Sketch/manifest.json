@@ -1,5 +1,5 @@
 {
-    "name": "A Plugin",
+    "name": "Sketch Toolkit",
     "identifier": "maxoxo.plugin",
     "version": "1.0",
     "description": "Only for Material Design Pattern",
@@ -7,25 +7,42 @@
     "author": "maxoxo",
 
     "commands": [{
-            "script": "application.js",
+            "script": "md-icon/application.js",
             "handler": "onRun",
-            "shortcut": "control shift r",
             "name": "生成图标主题",
-            "identifier": "maxoxo.plugin.sketchtoolkit"
+            "identifier": "iconGenerator"
         },
         {
-            "script": "setSharedStyle.js",
+            "script": "md-icon/setSharedStyle.js",
             "handler": "onRun",
-            "shortcut": "control shift t",
             "name": "设置样式",
-            "identifier": "maxoxo.plugin.setsharedstyle"
+            "identifier": "iconSetStyle"
         },
         {
-            "script": "copyArtboard.js",
+            "script": "md-icon/copyArtboard.js",
             "handler": "onRun",
-            "shortcut": "control shift y",
             "name": "重命图层",
-            "identifier": "maxoxo.plugin.copyartboard"
+            "identifier": "iconRenameLayer"
+        },
+        {
+            "name": "生成排版规模",
+            "script": "md-type/application.js",
+            "handler": "onRun",
+            "shortcut": "control shortcut t",
+            "identifier": "typeScaleGenerator"
         }
-    ]
+    ],
+    "menu": {
+        "title": "Sketch Toolkit",
+        "items": [
+            {
+                "title": "MD 图标",
+                "items": ["iconGenerator", "iconSetStyle", "iconRenameLayer"]
+            },
+            {
+                "title": "MD 排版",
+                "items": ["typeScaleGenerator",]
+            }
+        ]
+    }
 }
