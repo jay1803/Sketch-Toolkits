@@ -25,7 +25,6 @@ var width = 0;
 var x = 0;
 var selfX;
 for(i=0; i<cols; i++) {
-    print("starting..." + i + " - " + selfX + " - " + width + " - " + x);
     textLayer = [MSTextLayer new];
     group.addLayers([textLayer]);
     resultStr = values[i].join('\n');
