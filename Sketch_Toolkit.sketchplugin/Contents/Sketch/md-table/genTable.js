@@ -20,21 +20,42 @@ if(doc.currentPage().artboards().count() > 0) {
 
 group.setName('columns');
 
-
+print(dt)
 var width = 0;
 var x = 0;
 var selfX;
-for(i=0; i<cols; i++) {
-    textLayer = [MSTextLayer new];
-    group.addLayers([textLayer]);
-    resultStr = values[i].join('\n');
-    textLayer.setStringValue(resultStr);
-    textLayer.adjustFrameToFit();
-    textLayer.setLineHeight(48);
-    textLayer.frame().setX(x);
-    width = textLayer.frame().width();
-    selfX = textLayer.frame().x();
-    x = selfX + width + 24;
+switch (tp) {
+    case "table":
+        for(i=0; i<cols; i++) {
+            textLayer = [MSTextLayer new];
+            group.addLayers([textLayer]);
+            resultStr = values[i].join('\n');
+            textLayer.setStringValue(resultStr);
+            textLayer.adjustFrameToFit();
+            textLayer.setLineHeight(48);
+            textLayer.frame().setX(x);
+            width = textLayer.frame().width();
+            selfX = textLayer.frame().x();
+            x = selfX + width + 24;
+        }
+        break;
+    case "calendar":
+        for(i=0; i<cols; i++) {
+            textLayer = [MSTextLayer new];
+            group.addLayers([textLayer]);
+            resultStr = values[i].join('\n');
+            textLayer.setStringValue(resultStr);
+            textLayer.setLineHeight(48);
+            textLayer.frame().setWidth(48);
+            textLayer.frame().setX(x);
+            textLayer.setTextAlignment(2);
+            width = textLayer.frame().width();
+            selfX = textLayer.frame().x();
+            x = selfX + width;
+        }
+        break;
+    default:
+        break;
 }
 
 

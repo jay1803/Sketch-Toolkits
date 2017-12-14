@@ -1,7 +1,7 @@
 {
     "name": "Sketch Toolkit",
     "identifier": "maxoxo.plugin",
-    "version": "1.2",
+    "version": "1.3",
     "description": "Only for Material Design Pattern",
     "authorEmail": "ximy1803@gmail.com",
     "author": "maxoxo",
@@ -32,10 +32,16 @@
         },
         {
             "name": "从 CSV 生成表格",
-            "script": "md-table/application.js",
+            "script": "md-table/table.js",
+            "shortcut": "control shift w",
             "handler": "onRun",
-            "shortcut": "control shift t",
             "identifier": "tableCSVGenerator"
+        },
+        {
+            "name": "从 CSV 生成日历",
+            "script": "md-table/calendar.js",
+            "handler": "onRun",
+            "identifier": "calCSVGenerator"
         }
     ],
     "menu": {
@@ -51,7 +57,7 @@
             },
             {
                 "title": "MD 表格",
-                "items": ["tableCSVGenerator",]
+                "items": ["tableCSVGenerator", "calCSVGenerator"]
             }
         ]
     }
