@@ -36,6 +36,13 @@
             "handler": "onRun",
             "shortcut": "control shift t",
             "identifier": "tableCSVGenerator"
+        },
+        {
+            "name": "选中同名图层",
+            "script": "select/sameName.js",
+            "handler": "onRun",
+            "shortcut": "control shift s",
+            "identifier": "selectSameName"
         }
     ],
     "menu": {
@@ -47,11 +54,15 @@
             },
             {
                 "title": "MD 排版",
-                "items": ["typeScaleGenerator",]
+                "items": ["typeScaleGenerator"]
             },
             {
                 "title": "MD 表格",
-                "items": ["tableCSVGenerator",]
+                "items": ["tableCSVGenerator"]
+            },
+            {
+                "title": "选择器",
+                "items": ["selectSameName"]
             }
         ]
     }
